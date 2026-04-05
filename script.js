@@ -1,37 +1,38 @@
-const apiKey = "YOUR_REAL_API_KEY"; // Replace with your OpenWeatherMap API key
-
 async function getWeather() {
-  const city = document.getElementById("city").value.trim();
+    const city = document.getElementById('city').value.trim();
+    const weatherDiv = document.getElementById('weather');
 
-  if (!city) {
-    alert("Please enter a city name");
-    return;
-  }
-
-  // Use India as default country code (change if needed)
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},IN&units=metric&appid=${apiKey}`;
-
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-
-    console.log(data); // debug
-
-    if (data.cod != 200) {
-      alert(data.message); // shows real error: city not found / invalid key
-      return;
+    if (!city) {
+        alert("Please enter a city name!");
+        return;
     }
 
-    document.getElementById("cityName").innerText = data.name;
-    document.getElementById("temp").innerText = `🌡️ Temp: ${data.main.temp}°C`;
-    document.getElementById("desc").innerText = `☁️ ${data.weather[0].description}`;
-    document.getElementById("humidity").innerText = `💧 Humidity: ${data.main.humidity}%`;
-    document.getElementById("wind").innerText = `🌬️ Wind: ${data.wind.speed} m/s`;
+    weatherDiv.innerHTML = "Loading...";
 
-    document.getElementById("weather").classList.remove("hidden");
+    try {
+        const response = await fetch(`https://wttr.in/${city}?format=j1`);
+        const data = await response.json();
 
-  } catch (error) {
-    console.error("Error:", error);
-    alert("Failed to fetch weather");
-  }
+        const today = data.current_condition[0];
+
+        let icon = '';
+        const desc = today.weatherDesc[0].value.toLowerCase();
+
+        if(desc.includes('sun') || desc.includes('clear')) icon = '☀️';
+        else if(desc.includes('cloud')) icon = '☁️';
+        else if(desc.includes('rain')) icon = '🌧️';
+        else if(desc.includes('snow')) icon = '❄️';
+        else icon = '🌤️';
+
+        weatherDiv.innerHTML = `
+            <div class="weather-icon">${icon}</div>
+            <strong>${city}</strong><br>
+            ${today.weatherDesc[0].value}<br>
+            Temp: ${today.temp_C}°C | Feels like: ${today.FeelsLikeC}°C<br>
+            Humidity: ${today.humidity}%
+        `;
+    } catch (error) {
+        console.error(error);
+        weatherDiv.innerHTML = "Error fetching weather data!";
+    }
 }
