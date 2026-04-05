@@ -1,59 +1,61 @@
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.app {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
-  width: 320px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+.weather-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 30px 40px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    max-width: 350px;
+    width: 100%;
 }
 
 h1 {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
+    color: #333;
 }
 
-.search-box {
-  display: flex;
-  gap: 10px;
-}
-
-input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+input[type="text"] {
+    padding: 10px;
+    width: 70%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-bottom: 15px;
 }
 
 button {
-  padding: 10px 15px;
-  border: none;
-  background: #4facfe;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4facfe;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
-  background: #007bff;
+    background-color: #00f2fe;
 }
 
-.weather-card {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 15px;
-  background: #f7f7f7;
+#weather {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
 }
 
-.hidden {
-  display: none;
+.weather-icon {
+    width: 80px;
+    height: 80px;
+    margin: 10px 0;
 }
