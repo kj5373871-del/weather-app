@@ -1,61 +1,68 @@
 body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to right, #4facfe, #00f2fe);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #36d1dc, #5b86e5);
+  transition: 0.5s;
 }
 
-.weather-container {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    padding: 30px 40px;
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    max-width: 350px;
-    width: 100%;
+.app {
+  text-align: center;
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.2);
+  color: white;
+  width: 320px;
 }
 
-h1 {
-    margin-bottom: 20px;
-    color: #333;
+.search input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 70%;
 }
 
-input[type="text"] {
-    padding: 10px;
-    width: 70%;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    margin-bottom: 15px;
+.search button {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
 }
 
-button {
-    padding: 10px 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: #4facfe;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
+.loc-btn {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: white;
 }
 
-button:hover {
-    background-color: #00f2fe;
+.card {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 15px;
+  background: rgba(0,0,0,0.3);
 }
 
-#weather {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #333;
+.loader {
+  margin: 20px auto;
+  border: 5px solid #fff;
+  border-top: 5px solid transparent;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
 }
 
-.weather-icon {
-    width: 80px;
-    height: 80px;
-    margin: 10px 0;
+.hidden {
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
