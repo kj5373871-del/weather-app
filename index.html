@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Smart Weather App</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Weather App</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="weather-container">
-        <h1>Smart Weather App</h1>
-        <input type="text" id="city" placeholder="Enter city name">
-        <button onclick="getWeather()">Get Weather</button>
-        <div id="weather"></div>
-    </div>
+<div class="app">
+  <h1>🌤️ Weather Pro</h1>
 
-    <script src="script.js"></script>
+  <div class="search">
+    <input type="text" id="city" placeholder="Enter city...">
+    <button onclick="getWeather()">🔍</button>
+  </div>
+
+  <div id="loader" class="loader hidden"></div>
+
+  <div id="card" class="card hidden">
+    <h2 id="name"></h2>
+    <img id="icon" />
+    <p id="temp"></p>
+    <p id="desc"></p>
+    <p id="humidity"></p>
+    <p id="wind"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
