@@ -1,38 +1,60 @@
+const apiKey = "demo"; // demo key
+
+document.getElementById("city").addEventListener("keypress", function(e){
+  if(e.key === "Enter") getWeather();
+});
+
 async function getWeather() {
-    const city = document.getElementById('city').value.trim();
-    const weatherDiv = document.getElementById('weather');
+  const city = document.getElementById("city").value;
 
-    if (!city) {
-        alert("Please enter a city name!");
-        return;
-    }
+  if(city === "") return alert("Enter city");
 
-    weatherDiv.innerHTML = "Loading...";
+  showLoader(true);
 
-    try {
-        const response = await fetch(`https://wttr.in/${city}?format=j1`);
-        const data = await response.json();
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-        const today = data.current_condition[0];
+  const res = await fetch(url);
+  const data = await res.json();
 
-        let icon = '';
-        const desc = today.weatherDesc[0].value.toLowerCase();
+  showLoader(false);
 
-        if(desc.includes('sun') || desc.includes('clear')) icon = '☀️';
-        else if(desc.includes('cloud')) icon = '☁️';
-        else if(desc.includes('rain')) icon = '🌧️';
-        else if(desc.includes('snow')) icon = '❄️';
-        else icon = '🌤️';
+  if(data.cod != 200) {
+    alert("City not found ❌");
+    return;
+  }
 
-        weatherDiv.innerHTML = `
-            <div class="weather-icon">${icon}</div>
-            <strong>${city}</strong><br>
-            ${today.weatherDesc[0].value}<br>
-            Temp: ${today.temp_C}°C | Feels like: ${today.FeelsLikeC}°C<br>
-            Humidity: ${today.humidity}%
-        `;
-    } catch (error) {
-        console.error(error);
-        weatherDiv.innerHTML = "Error fetching weather data!";
-    }
+  updateUI(data);
+}
+
+function updateUI(data) {
+  document.getElementById("name").innerText = data.name;
+  document.getElementById("temp").innerText = `🌡 ${data.main.temp} °C`;
+  document.getElementById("desc").innerText = data.weather[0].description;
+  document.getElementById("humidity").innerText = `💧 ${data.main.humidity}%`;
+  document.getElementById("wind").innerText = `🌬 ${data.wind.speed} km/h`;
+
+  const iconCode = data.weather[0].icon;
+  document.getElementById("icon").src =
+    `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+  document.getElementById("card").classList.remove("hidden");
+
+  changeBackground(data.weather[0].main);
+}
+
+function showLoader(show) {
+  document.getElementById("loader").classList.toggle("hidden", !show);
+}
+
+function changeBackground(weather) {
+  const body = document.body;
+
+  if(weather === "Clear")
+    body.style.background = "linear-gradient(135deg,#fceabb,#f8b500)";
+  else if(weather === "Clouds")
+    body.style.background = "linear-gradient(135deg,#bdc3c7,#2c3e50)";
+  else if(weather === "Rain")
+    body.style.background = "linear-gradient(135deg,#4b79a1,#283e51)";
+  else
+    body.style.background = "linear-gradient(135deg,#36d1dc,#5b86e5)";
 }
